@@ -1,0 +1,126 @@
+<div id="profile-details" header showprofile="false" icon="fa fa-plane" title1="Task Board" query='query' ></div>
+
+<div class="container">
+  <div class="row searchWrapper">
+    <div class="col-sm-4 col-md-3 col-xs-12">
+      <input type="text" class="form-control searchBox" placeholder="Search" ng-model="search.$" />
+    </div>
+ </div><!--row end here -->
+ 
+
+<div class="row" ng-controller="tasksCtrl">
+  <div class="my-visit-content col-sm-12">
+    <div class="cardContainer">
+        <div class="cardWrapper">
+          <ul>
+            <li class="col-sm-12 cardItem" ng-repeat="task in pagedData | filter: search | limitTo:pageSize"  style="background-image: url(/public/m/images/email-background.jpg)">
+                
+                 <div ng-if="(task.dueDate == null)">
+                    <div class="card-header"></div>
+                  </div>
+                
+                  <div ng-if="((task.dueDate | date:'yyyy/MM/dd') <= (CurrentDate | date:'yyyy/MM/dd')) && (task.status == 'Open')">
+                    <div class="card-header red"></div>
+                  </div>
+
+                  <div ng-if="((task.dueDate | date:'yyyy/MM/dd') >= (CurrentDate | date:'yyyy/MM/dd')) && (task.status == 'Open')">
+                    <div class="card-header"></div>
+                  </div>
+
+                  <div ng-if="task.status == 'closed'">
+                    <div class="card-header green"></div>
+                  </div>
+
+                  <div ng-if="(task.dueDate ==null)" class="borderWrapper">
+                    <a class="pull-right" href="#/tasks/{{task._id}}/edit"><span class="fa fa-pencil-square-o addUserIcon"/></a>
+                    <section class="card-container">
+                      <div class="visitlinks">                                               
+                        <div ng-init="limitText=20">
+                           <p>{{ task.taskTitle | limitTo: limitText }} 
+                               <a href="javascript:void(0)" 
+                                   ng-hide="task.taskTitle.length < limitText" 
+                                   ng-click="limitText = task.taskTitle.length + 1">...
+                               </a>
+                           </p>
+                        </div>                          
+                        <h6>Assigned To : <b>{{task.taskAssignedTo}}</b></h6>
+                        <h6>Status : <b>{{task.status}}</b></h6>
+                        <h6>Priority : <b>{{task.priority}}</b></h6>
+                        <div class="brown-font"><i class="fa fa-calendar"></i> Due On : {{task.dueDate | date:'dd MMM yyyy'}} </div>
+                      </div>
+                    </section>
+                  </div>
+                
+                  <div ng-if="((task.dueDate | date:'yyyy/MM/dd') <= (CurrentDate | date:'yyyy/MM/dd')) && (task.status == 'Open')" class="borderWrapper redBorder">
+                    <a class="pull-right" href="#/tasks/{{task._id}}/edit"><span class="fa fa-pencil-square-o addUserIcon"/></a>
+                    <section class="card-container">
+                      <div class="visitlinks">
+                         <div ng-init="limitText=20">
+                           <p>{{ task.taskTitle | limitTo: limitText }} 
+                               <a href="javascript:void(0)" 
+                                   ng-hide="task.taskTitle.length < limitText" 
+                                   ng-click="limitText = task.taskTitle.length + 1">...
+                               </a>
+                           </p>
+                        </div>   
+                        <h6>Assigned To : <b>{{task.taskAssignedTo}}</b></h6>
+                        <h6>Status : <b>{{task.status}}</b></h6>
+                        <h6>Priority : <b>{{task.priority}}</b></h6>
+                        <div class="brown-font"><i class="fa fa-calendar"></i> Due On : {{task.dueDate | date:'dd MMM yyyy'}} </div>
+                      </div>
+                    </section>
+                  </div>
+
+                  <div ng-if="((task.dueDate | date:'yyyy/MM/dd') >= (CurrentDate | date:'yyyy/MM/dd')) && (task.status == 'Open')" class="borderWrapper">
+                    <a class="pull-right" href="#/tasks/{{task._id}}/edit"><span class="fa fa-pencil-square-o addUserIcon"/></a>
+                    <section class="card-container">
+                      <div class="visitlinks">
+                         <div ng-init="limitText=20">
+                           <p>{{ task.taskTitle | limitTo: limitText }} 
+                               <a href="javascript:void(0)" 
+                                   ng-hide="task.taskTitle.length < limitText" 
+                                   ng-click="limitText = task.taskTitle.length + 1">...
+                               </a>
+                           </p>
+                        </div>   
+                        <h6>Assigned To : <b>{{task.taskAssignedTo}}</b></h6>
+                        <h6>Status : <b>{{task.status}}</b></h6>
+                        <h6>Priority : <b>{{task.priority}}</b></h6>
+                        <div class="brown-font"><i class="fa fa-calendar"></i> Due On : {{task.dueDate | date:'dd MMM yyyy'}} </div>
+                      </div>
+                    </section>
+                  </div>
+
+                  <div ng-if="task.status == 'closed'" class="borderWrapper greenBorder">
+                    <a class="pull-right" href="#/tasks/{{task._id}}/edit"><span class="fa fa-pencil-square-o addUserIcon"/></a>
+                    <section class="card-container">
+                      <div class="visitlinks">
+                         <div ng-init="limitText=20">
+                           <p>{{ task.taskTitle | limitTo: limitText }} 
+                               <a href="javascript:void(0)" 
+                                   ng-hide="task.taskTitle.length < limitText" 
+                                   ng-click="limitText = task.taskTitle.length + 1">...
+                               </a>
+                           </p>
+                        </div>   
+                        <h6>Assigned To : <b>{{task.taskAssignedTo}}</b></h6>
+                        <h6>Status : <b>{{task.status}}</b></h6>
+                        <h6>Priority : <b>{{task.priority}}</b></h6>
+                        <div class="brown-font"><i class="fa fa-calendar"></i> Due On : {{task.dueDate | date:'dd MMM yyyy'}}</div>
+                      </div>
+                    </section>
+                  </div>
+              </li>
+          </ul>
+        </div> 
+    </div>
+    <div class="pagination col-sm-12">
+          <button ng-disabled="pageButtonDisabled(-1)" ng-click="paginate(-1)" class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+          <button ng-disabled="pageButtonDisabled(1)" ng-click="paginate(1)" class="btn btn-primary"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+          <br /><br />
+          Page {{currentPage+1}} of {{totalPages}}
+    </div>
+  </div>
+  
+  </div><!--row end here -->
+  </div><!--container end here -->

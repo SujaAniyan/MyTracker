@@ -1,0 +1,2 @@
+{"name":"systemlogs","hostname":"CSCINDAH771391","pid":1652,"level":30,"userId":"a20474567892345678900021","userEmail":"saniyan@csc.com","msg":"User Data Updated","time":"2016-11-14T05:39:49.634Z","src":{"file":"D:\\TaskTracker\\services\\users.js","line":121},"v":0}
+{"name":"systemlogs","hostname":"CSCINDAH771391","pid":1652,"level":30,"userId":"a20474567892345678900021","userEmail":"saniyan@csc.com","msg":"User Data Updated","time":"2016-11-14T05:40:18.794Z","src":{"file":"D:\\TaskTracker\\services\\users.js","line":121},"v":0}
