@@ -29,27 +29,31 @@ function getMenu(user, type){
 		//} // end of if condition
 	}); // end of for each block
 
-    menu.push("<div id='tabsI'>");
-    menu.push("<ul>"); 
+    //menu.push("<div id='tabsI'>");
+   // menu.push("<ul>"); 
     /*for(i = 0; i < user.folders.length; i++){
         console.log("user.folders[i] = ", user.folders[i]);
         menu.push(util.formatString("<li><a  href='%s' title='Folders'><span>" + user.folders[i].folderName + "</span></a></li>", user.folders[i].folderName));
     }*/
-    menu.push("<li><a href='folders' title='Folders' onClick ='return showFolders();'><span>Folders</span></a></li>");
+    /*menu.push("<li><a href='#folders' title='Folders''><span>Folders</span></a></li>");
     menu.push("<li><a href='#labels' title='Labels'><span>Labels</span></a></li>");
     menu.push("<li><a href='#filters' title='Filters'><span>Filters</span></a></li>"); 
-   /* menu.push("<div id='items'>");
-    menu.push("<p id='item1'>... item 1... </p>");
-    menu.push("<p id='item2'>... item 2... </p>");
-    menu.push("<p id='item3'>... item 3... </p></div>");*/
-    menu.push("</ul></div>");
+    menu.push("<div class='items'>");
+    menu.push("<div id='folders'>... item 1... </div>");
+    menu.push("<div id='labels'>... item 2... </div>");
+    menu.push("<div id='filters'>... item 3... </div></div>");*/
+    
+    menu.push("<div class='tabbed-area'> <ul class='tabs group'><li><a href='#box-one'>Tab 1</a></li> <li><a href='#box-two'>Tab 2</a></li> <li><a href='#box-three'>Tab 3</a></li></ul>");
+    menu.push("<div class='box-wrap'> <div id='box-one'>box two content </div> <div id='box-two'>box two content</div><div id='box-three'>box two content</div></div>div>");  
+    
+    //menu.push("</ul></div>");
 	menu.push("</ul>")
 	menu.push("</div>");
 	return(menu.join("\n"));
 } // end of getMenu()
 
 function showFolders(){
-    console.log("herererre");
+    console.log("herereeeeeeerre");
      if(user.folders != undefined){
          for(i = 0; i < user.folders.length; i++){
             console.log("user.folders[i] = ", user.folders[i]);
