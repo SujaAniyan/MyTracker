@@ -12,7 +12,8 @@ var taskSchema = new mongoose.Schema({
     assignedDate		:{ type: Date },
 	dueDate			    :{ type: Date },
     status			    :{ type: String, default: 'Open' },
-    attachments         :{ type: String }
+    attachments         :{ type: String },
+    folderName          :{ type: String }
 });
 
 module.exports = mongoose.model('tasks', taskSchema);
