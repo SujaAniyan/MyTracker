@@ -85,12 +85,7 @@ angular.module('tasks')
         $scope.taskList="";
         $location.path("/tasks");
     };//cancel method ends
-    
-    $scope.openAttachment = function(path) {
-        console.log(path);
-        $scope.file_path = path;
-    };
-    
+      
  }])
 
 .directive('uiDate', function() {
