@@ -23,7 +23,7 @@
                     <div class="card-header red"></div>
                   </div>
 
-                  <div ng-if="((task.dueDate | date:'yyyy/MM/dd') >= (CurrentDate | date:'yyyy/MM/dd')) && (task.status == 'Open')">
+                  <div ng-if="((task.dueDate | date:'yyyy/MM/dd') > (CurrentDate | date:'yyyy/MM/dd')) && (task.status == 'Open')">
                     <div class="card-header"></div>
                   </div>
 
@@ -71,7 +71,7 @@
                     </section>
                   </div>
 
-                  <div ng-if="((task.dueDate | date:'yyyy/MM/dd') >= (CurrentDate | date:'yyyy/MM/dd')) && (task.status == 'Open')" class="borderWrapper">
+                  <div ng-if="((task.dueDate | date:'yyyy/MM/dd') > (CurrentDate | date:'yyyy/MM/dd')) && (task.status == 'Open')" class="borderWrapper">
                     <a class="pull-right" href="#/tasks/{{task._id}}/edit"><span class="fa fa-pencil-square-o addUserIcon"/></a>
                     <section class="card-container">
                       <div class="visitlinks">
