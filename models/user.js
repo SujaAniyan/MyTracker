@@ -74,7 +74,12 @@ var userSchema = mongoose.Schema({
     token            : {type: Object},
     status           : {type: String, default: 'Active'},
     theme            : {type: String},
-    attachment       : { type: String, trim: true }    
+    attachment       : { type: String, trim: true },
+    folders        : [{
+        _id              : false,
+      folderName         : String
+    }],
+    
 });
 
 // Execute before each user.save() call

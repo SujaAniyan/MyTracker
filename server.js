@@ -72,7 +72,7 @@ var notifier = require('mail-notifier');
 
 var imap = {
       user: "saniyan@csc.com",
-      password: "********",
+      password: "*****",
       host: "outlook.office365.com",
       port: 993,
       tls: true,
@@ -85,7 +85,7 @@ var imap = {
 };
 
 notifier(imap).on('mail',function(mail){
-    var index, dueDate = null, priority = "Medium";
+    var index, endIndex, dueDate = null, priority = "Medium";
     //extracting sender email id and name from mail
     var fromAddress = JSON.parse(JSON.stringify(mail.from));
     var senderEmailid,senderName,mailSubject,mailHtml;
@@ -108,25 +108,35 @@ notifier(imap).on('mail',function(mail){
     //extracting subject from mail
     console.log("Subject:", mail.subject);
     mailSubject =  mail.subject;
-    
+        
     if(mailSubject && mailSubject.contains("@duedate:"))
     {
         index = mailSubject.indexOf("@duedate:");        
-        dueDate = mailSubject.substr(index+9, index+19);
+        dueDate = mailSubject.substring(index+9, index+19);
         console.log(dueDate);
     }
     
     if(mailSubject && mailSubject.contains("@priority:"))
     {
-        index = mailSubject.indexOf("@priority:");        
-        priority = mailSubject.substr(index+10, index+20);
+        index = mailSubject.indexOf("@priority:");   
+        endIndex =  mailSubject.indexOf(' ', index+10);
+        if (endIndex == -1){
+            endIndex = mailSubject.indexOf('@', index+10);
+            if(endIndex == -1){
+                endIndex = mailSubject.length;
+            }
+        }
+        console.log("endIndex = ", endIndex);
+        priority = mailSubject.substring(index+10, endIndex);
         console.log(priority);
     }
     
      //extracting mail content from mail
     console.log("Content:", mail.html); 
     mailHtml = mail.html;
-    mailHtml = mailHtml.substr(0, mailHtml.length-1); 
+    if(mailHtml != undefined){
+        mailHtml = mailHtml.substr(0, mailHtml.length-1); 
+    }
     
     //Check for attachments, if exists extract each attachment and save it to the file system ["uploads" folder] 
     var attachmentNames = "";
@@ -143,6 +153,12 @@ notifier(imap).on('mail',function(mail){
         attachmentNames = attachmentNames.substr(0, attachmentNames.length-1); 
     }
     
+    
+    if(mailSubject && mailSubject.contains("@")){
+        index = mailSubject.indexOf("@");  
+        mailSubject = mailSubject.substring(0, index);
+    }
+    
     var request = require('request');
     request.post('http://localhost:8080/api/v1/secure/tasks/',
          {form:
@@ -156,7 +172,6 @@ notifier(imap).on('mail',function(mail){
              attachments    : attachmentNames
             }
     });   
-    
     
     
     

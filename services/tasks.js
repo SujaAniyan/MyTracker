@@ -54,7 +54,7 @@ function create(data) {
     var deferred = Q.defer();
 
     console.log("Saving Group........");
-    console.log(data);
+    //console.log(data);
     model.create(data, function (err, doc) {
         if (err) {
             console.log("err- " + err);
